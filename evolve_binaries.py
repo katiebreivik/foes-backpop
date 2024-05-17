@@ -65,6 +65,7 @@ def evolv2(m1, m2, logtb, e, alpha_1, vk1, theta1, phi1, omega1, logZ):
     bhspin,tphys,zpars,bkick,kick_info,
     bpp_index_out,bcm_index_out,kick_info_out,
     bpp_out)
+ 
     
     bpp = bpp_out._arr.reshape(43,1000)[:,0:bpp_index_out._obj.value].T
     bpp = pd.DataFrame(bpp, 
@@ -76,6 +77,7 @@ def evolv2(m1, m2, logtb, e, alpha_1, vk1, theta1, phi1, omega1, logZ):
                                 'renv_1', 'renv_2', 'omega_spin_1', 'omega_spin_2', 'B_1', 
                                 'B_2', 'bacc_1', 'bacc_2', 'tacc_1', 'tacc_2', 'epoch_1', 
                                 'epoch_2', 'bhspin_1', 'bhspin_2'])
+    
     
     # make your selection on kstar types and orbit properties
     bpp = bpp.loc[(bpp.kstar_1 == 14) & (bpp.kstar_2 == 3) & (bpp.porb > 0.0)]
@@ -146,4 +148,4 @@ sampler.run_mcmc(p0, n_steps, progress=True)
 #_ = likelihood(p)
 
 
-np.savez('./bh2_test',nwalkers=n_walkers,n_steps=n_steps,chain=sampler.chain)
+np.savez('./test',nwalkers=n_walkers,n_steps=n_steps,chain=sampler.chain)
